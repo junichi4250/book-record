@@ -1,3 +1,4 @@
+import { List } from "@material-ui/core";
 import React from "react";
 
 interface PROPS {
@@ -14,7 +15,9 @@ const Books: React.FC<PROPS> = (props) => {
   return (
     <div>
       <div>
-        <img src={props.largeImageUrl}></img>
+        <List>
+          <img src={props.largeImageUrl}></img>
+        </List>
       </div>
       <ul>
         <li>{props.title}</li>
