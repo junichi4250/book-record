@@ -69,10 +69,6 @@ const Top: React.FC = () => {
             title={book.Item.title}
             subTitle={book.Item.subTitle}
           />
-          // <li key={index}>
-          //   {" "}
-          //   {index} : {book.Item.author}{" "}
-          // </li>
         ))}
       </ul>
     </div>
