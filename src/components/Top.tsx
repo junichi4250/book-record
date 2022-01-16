@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Books from "./Books";
 import Header from "./Header";
+import styled from "styled-components";
 
 type Book = {
   Item: Item;
@@ -57,22 +58,41 @@ const Top: React.FC = () => {
         />
         <input onClick={searchBooks} type="submit" value="search" />
       </form>
-      <ul>
+      <BookGroup>
         {books.map((book: Book) => (
-          <Books
-            isbn={book.Item.isbn}
-            author={book.Item.author}
-            itemPrice={book.Item.itemPrice}
-            itemUrl={book.Item.itemUrl}
-            largeImageUrl={book.Item.largeImageUrl}
-            publisherName={book.Item.publisherName}
-            title={book.Item.title}
-            subTitle={book.Item.subTitle}
-          />
+          <li>
+            <Books
+              isbn={book.Item.isbn}
+              author={book.Item.author}
+              itemPrice={book.Item.itemPrice}
+              itemUrl={book.Item.itemUrl}
+              largeImageUrl={book.Item.largeImageUrl}
+              publisherName={book.Item.publisherName}
+              title={book.Item.title}
+              subTitle={book.Item.subTitle}
+            />
+          </li>
         ))}
-      </ul>
+      </BookGroup>
     </div>
   );
 };
+
+const BookGroup: React.FC = styled.ul`
+  width: 1004px;
+  margin-left: auto;
+  margin-right: auto;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 3px solid #f2f2f2;
+  > li {
+    width: 120px;
+    height: 300px;
+    padding-right: 30px;
+    padding-left: 30px;
+    margin-bottom: 60px;
+  }
+`;
 
 export default Top;

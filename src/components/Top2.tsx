@@ -3,7 +3,6 @@ import axios from "axios";
 import Books from "./Books";
 import Header from "./Header";
 import Tab from "./Tab";
-import Modal from "./Modal";
 import Read from "./tab/Read";
 import Reading from "./tab/ReadFeature";
 import styled from "styled-components";

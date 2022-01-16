@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { db } from "../firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 interface PROPS {
   isbn: Int16Array;
@@ -45,7 +47,7 @@ const Books: React.FC<PROPS> = (props) => {
       title: props.title,
       timestamp: serverTimestamp(),
     });
-    toast("登録しました");
+    toast("読んだ本に登録しました");
     setOpen(false);
   };
   const reading = () => {
@@ -58,7 +60,7 @@ const Books: React.FC<PROPS> = (props) => {
       title: props.title,
       timestamp: serverTimestamp(),
     });
-    toast("登録しました");
+    toast("読んでいる本に登録しました");
     setOpen(false);
   };
   const readStack = () => {
@@ -71,7 +73,7 @@ const Books: React.FC<PROPS> = (props) => {
       title: props.title,
       timestamp: serverTimestamp(),
     });
-    toast("登録しました");
+    toast("積読本に登録しました");
     setOpen(false);
   };
   const readFeature = () => {
@@ -84,25 +86,33 @@ const Books: React.FC<PROPS> = (props) => {
       title: props.title,
       timestamp: serverTimestamp(),
     });
-    toast("登録しました");
+    toast("読みたい本に登録しました");
     setOpen(false);
   };
 
   return (
-    <div>
-      <div>
-        <List>
-          <img src={props.largeImageUrl}></img>
-        </List>
-      </div>
-      <Button onClick={handleOpen}>本を登録</Button>
+    <BookList>
+      <ul>
+        <li>
+          <div>
+            <List>
+              <img src={props.largeImageUrl}></img>
+            </List>
+          </div>
+        </li>
+        <li>
+          {" "}
+          <Button onClick={handleOpen}>+本を登録する</Button>
+        </li>
+        <li>
+          <Link to={`/book/${props.isbn}`}>{props.title} </Link>
+        </li>
+        <li>{props.author}</li>
+      </ul>
+
       <Toaster />
       <Modal open={open} onClose={handleClose}>
         <Box sx={style}>
-          <Typography>Text in a modal</Typography>
-          <Typography>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
           <ul>
             <li>
               <Button onClick={readed}>読んだ本に登録</Button>
@@ -119,15 +129,45 @@ const Books: React.FC<PROPS> = (props) => {
           </ul>
         </Box>
       </Modal>
-      <ul>
-        <li>{props.title}</li>
-        <li>{props.subTitle}</li>
-        <li>{props.author}</li>
-        <li>{props.itemPrice}</li>
-        <li>{props.publisherName}</li>
-      </ul>
-    </div>
+    </BookList>
   );
 };
+
+const BookList: React.FC = styled.div`
+  > ul {
+    list-style: none;
+    padding: 0px;
+    > li {
+      color: #219315;
+      font-size: 14px;
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      > a {
+        color: #219315;
+        font-weight: bold;
+        text-decoration: none;
+      }
+      > div {
+        > image {
+          position: relative;
+          &:hover {
+          }
+        }
+      }
+      > button {
+        width: 100%;
+        text-align: center;
+        margin: 0px;
+        color: white;
+        background-color: #219315;
+        &:hover {
+          background-color: #ffa500;
+        }
+      }
+    }
+  }
+`;
 
 export default Books;
