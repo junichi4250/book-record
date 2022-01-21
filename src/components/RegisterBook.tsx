@@ -1,5 +1,6 @@
 import { List } from "@material-ui/core";
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface PROPS {
   isbn: string;
@@ -13,7 +14,9 @@ const RegisterBook: React.FC<PROPS> = (props) => {
   return (
     <div>
       <List>
-        <img src={props.largeImageUrl}></img>
+        <Link to={`/readed/${props.isbn}`}>
+          <img src={props.largeImageUrl}></img>
+        </Link>
       </List>
       <ul>
         <li>{props.title}</li>

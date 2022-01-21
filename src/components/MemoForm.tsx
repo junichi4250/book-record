@@ -1,8 +1,11 @@
-import { Rating } from "@material-ui/lab";
+import { Tab } from "@material-ui/core";
+import { Rating, TabList } from "@material-ui/lab";
+import { TabsUnstyled } from "@mui/base";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { setConstantValue } from "typescript";
+import UnstyledTabsCustomized from "./UnstyledTabsCustomized";
 
 // type SubmitData = {
 //   Status: String;
@@ -40,6 +43,7 @@ const MemoForm: React.FC = () => {
           <option value="readStack">積読本</option>
           <option value="readFeature">読みたい本</option>
         </select>
+        <UnstyledTabsCustomized />
         <h4>評価: </h4>
         <Rating
           name="simple-controlled"
